@@ -44,14 +44,14 @@ class CheckingAccount extends Account{
         overdraftProtection=-1.0;
     }
     
+    @Override
     public boolean withdraw(double amt){
-        super.withdraw(amt);
         double overdraftNeeded = amt - this.balance;
         if (balance - amt >= 0.0) {
             this.balance -= amt;
             return true;
         }else{
-            if (overdraftProtection == -1.0 || overdraftProtection < overdraftNeeded) {
+            if (overdraftProtection != -1.0 || overdraftProtection < overdraftNeeded){
                 return false;
             }else{
                 this.balance = 0.0;
@@ -61,3 +61,4 @@ class CheckingAccount extends Account{
         }
     }
 }
+
